@@ -1,17 +1,21 @@
 <div class="w-full min-h-screen" style="background-color: #EFF6FC;">
-    <div class="w-full flex flex-col md:flex-row items-center justify-start p-1 gap-1 mb-1">
-        <div class="w-full aspect-4/3 bg-white rounded shadow">
-            <video #remoteVideo class="w-full aspect-4/3 rounded -scale-x-100" autoplay playsInline></video>
+    <div class="w-full flex flex-col md:flex-row items-center justify-start mb-1">
+        <div class="w-full aspect-4/3 bg-zinc-800">
+            <video #remoteVideo class="w-full aspect-4/3 -scale-x-100" autoplay playsInline></video>
         </div>
-        <div class="w-full aspect-4/3 bg-white rounded shadow">
-            <video #localVideo class="w-full aspect-4/3 rounded -scale-x-100" autoplay playsInline></video>
+        <div class="w-full aspect-4/3 bg-black rounded">
+            <video #localVideo class="w-full aspect-4/3 -scale-x-100" autoplay playsInline></video>
         </div>
     </div>
     <div class="w-full flex flex-col md:flex-row items-center justify-start p-1">
         <div class="w-full flex items-center justify-start gap-3">
-            <button class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Start</button>
-            <button class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Next</button>
-            <button class="w-full py-16 bg-red-500 text-white text-2xl rounded shadow-md shadow-red-700 hover:bg-red-600 active:bg-red-700 disabled:shadow-none disabled:bg-red-300 transition-colors">Stop</button>
+            @if (isStarted) {
+                <button class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Next</button>
+            } @else {
+                <button (click)="onChangeStatus()" class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Start</button>
+            }
+            <button (click)="onChangeStatus()" class="w-full py-16 bg-red-500 text-white text-2xl rounded shadow-md shadow-red-700 hover:bg-red-600 active:bg-red-700 disabled:shadow-none disabled:bg-red-300 transition-colors" [disabled]="!isStarted">Stop</button>
+            <div class="w-full"></div>
             <div class="w-full"></div>
         </div>
         <div class="w-full border bg-white rounded">

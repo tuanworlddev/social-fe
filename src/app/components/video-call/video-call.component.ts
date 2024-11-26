@@ -12,6 +12,9 @@ export class VideoCallComponent implements OnInit, OnDestroy {
   @ViewChild('localVideo') localVideo!: ElementRef;
   @ViewChild('remoteVideo') remoteVideo!: ElementRef;
 
+  isStarted: boolean = false;
+  isSearching: boolean = false;
+
   constructor(private localStreamService: LocalStreamService) {
   }
 
@@ -23,6 +26,10 @@ export class VideoCallComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.localStreamService.close();
+  }
+
+  onChangeStatus() {
+    this.isStarted = !this.isStarted;
   }
   
 }
