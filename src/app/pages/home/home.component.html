@@ -1,6 +1,6 @@
-<div class="flex">
-    <app-sidebar></app-sidebar>
-    <div class="w-full">
+<div class="flex h-screen">
+    <app-sidebar [user]="currentUser!"></app-sidebar>
+    <div class="flex-1 overflow-auto">
         <router-outlet></router-outlet>
     </div>
 </div>
