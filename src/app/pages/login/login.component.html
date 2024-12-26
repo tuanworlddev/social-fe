@@ -9,8 +9,8 @@
         <input type="text" name="email" id="email"
           class="w-full outline-none border rounded p-2 focus:border-orange-500 transition-colors"
           formControlName="email" placeholder="Enter email address" required />
-        @if (getEmail()?.invalid && (getEmail()?.dirty || getEmail()?.touched)) {
-        <div class="text-sm text-red-500">
+        <div class="text-sm text-red-500 transition-all ease-in-out opacity-0"
+          [ngClass]="{'opacity-100': getEmail()?.invalid && (getEmail()?.dirty || getEmail()?.touched)}">
           @if (getEmail()?.hasError('required')) {
           Email is required
           }
@@ -18,26 +18,26 @@
           Invalid email format
           }
         </div>
-        }
       </div>
       <div class="mb-2 flex flex-col">
         <label for="password" class="text-gray-500">Password</label>
         <input type="password" name="password" id="password"
           class="w-full outline-none border rounded p-2 focus:border-orange-500 transition-colors"
           formControlName="password" placeholder="Enter a password" required />
-        @if (getPassword()?.invalid && (getPassword()?.dirty || getPassword()?.touched)) {
-        <div class="text-sm text-red-500">
-          @if (getPassword()?.hasError('required')) {
-          Password is required
-          }
-          @if (getPassword()?.hasError('minlength')) {
-          Password must be at least 6 characters long
-          }
+        <div class="flex items-center justify-between">
+          <div class="text-sm text-red-500 transition-all ease-in-out opacity-0"
+            [ngClass]="getPassword()?.invalid && (getPassword()?.dirty || getPassword()?.touched) ? 'opacity-100' : 'opacity-0'">
+            @if (getPassword()?.hasError('required')) {
+            Password is required
+            }
+            @if (getPassword()?.hasError('minlength')) {
+            Password must be at least 6 characters long
+            }
+          </div>
+          <div>
+            <a routerLink="/forgot-password">Forgot password?</a>
+          </div>
         </div>
-        }
-      </div>
-      <div class="text-end mb-4">
-        <a routerLink="/forgot-password">Forgot password?</a>
       </div>
       <button type="submit"
         class="w-full flex items-center justify-center gap-2 rounded bg-orange-500 text-white p-2 hover:bg-orange-600 transition-colors mb-3"

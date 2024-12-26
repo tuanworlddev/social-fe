@@ -8,10 +8,17 @@
             <!-- Dùng text-ellipsis để xử lý overflow text -->
             <h5 class="h-10 mb-2 text-xl tracking-tight text-gray-900 text-ellipsis">{{ friend().friend.fullName }}</h5>
         </a>
-        <div class="text-end">
-            <button (click)="confrimFriend(friend().id)" 
+        <div class="w-full flex items-center justify-between gap-2">
+            @if (friend().status === 'pending') {
+                <button (click)="respondToRequest(friend().id, 'rejected')"
+                class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-black bg-zinc-300 rounded-lg hover:bg-zinc-400 focus:ring-2 transition-colors focus:outline-none focus:ring-yellow-300">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <span>Reject</span>
+            </button>
+            <button (click)="respondToRequest(friend().id, 'accepted')"
                 class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-2 transition-colors focus:outline-none focus:ring-yellow-300">
-                <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"
+                    stroke="#ffffff">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -19,16 +26,26 @@
                         <g id="Complete">
                             <g data-name="add" id="add-2">
                                 <g>
-                                    <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12" x2="12" y1="19" y2="5"></line>
-                                    <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="5" x2="19" y1="12" y2="12"></line>
+                                    <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" x1="12" x2="12" y1="19" y2="5"></line>
+                                    <line fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" x1="5" x2="19" y1="12" y2="12"></line>
                                 </g>
                             </g>
                         </g>
                     </g>
                 </svg>
-                <span>Confirm friend</span>
+                <span>Access</span>
             </button>
+            } @else {
+            @if (friend().status === 'accepted') {
+            <button (click)="deleteFriend()"
+                class="inline-flex items-center px-2 py-1 text-sm font-medium text-center text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-2 transition-colors focus:outline-none focus:ring-yellow-300">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <span>Delete friend</span>
+            </button>
+            }
+            }
         </div>
     </div>
 </div>
-

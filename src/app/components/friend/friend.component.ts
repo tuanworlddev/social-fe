@@ -6,6 +6,8 @@ import { friend } from '../../interfaces/friend';
 import { AuthService } from '../../services/auth.service';
 import { FriendService } from '../../services/friend.service';
 import { FriendItemComponent } from '../friend-item/friend-item.component';
+import { FriendResponse } from '../../interfaces/friend-response';
+import { UserResponse } from '../../interfaces/user-response';
 
 @Component({
   selector: 'app-friend',
@@ -15,33 +17,48 @@ import { FriendItemComponent } from '../friend-item/friend-item.component';
   styleUrl: './friend.component.css'
 })
 export class FriendComponent implements OnInit {
-  friends: friend[] = [];
-  users: User[] = [];
-
+  friends: FriendResponse[] = [];
+  notFriends: UserResponse[] = [];
+  pendingRequests: FriendResponse[] = [];
+  
   constructor(private friendService: FriendService, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.userService.getAllUser().subscribe((response) => {
-      this.users = response.data;
+    this.loadFriends();
+    this.loadNotFriends();
+    this.loadPendingRequests();
+  }
 
-      this.authService.getCurrentUser().subscribe((currentUser) => {
-        if (currentUser) {
-
-          this.friendService.getAllFriends().subscribe((response) => {
-            this.friends = response.data;
-            console.log(this.friends);
-            
-
-            this.users = this.users.filter(
-              (user) =>
-                user.id !== currentUser.id &&
-                !this.friends.some((friend) => friend.friend.id === user.id)
-            );
-            console.log("Filtered Users:", this.users);
-          });
-        }
-      });
+  loadFriends(): void {
+    this.friendService.getFriends().subscribe(data => {
+      this.friends = data;
     });
   }
 
+  loadNotFriends(): void {
+    this.friendService.getNotFriends().subscribe(data => {
+      this.notFriends = data;
+    });
+  }
+
+  loadPendingRequests(): void {
+    this.friendService.getPendingRequests().subscribe(data => {
+      this.pendingRequests = data;
+    });
+  }
+
+  sendFriendRequest(friendId: number): void {
+    this.friendService.sendFriendRequest(friendId).subscribe(() => {
+      alert('Friend request sent!');
+      this.loadNotFriends();
+    });
+  }
+
+  respondToRequest(requestId: number, response: string): void {
+    this.friendService.respondToRequest(requestId, response).subscribe(() => {
+      alert(`Friend request ${response}`);
+      this.loadPendingRequests();
+      this.loadFriends();
+    });
+  }
 }

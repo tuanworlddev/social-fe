@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { WebSocketService } from '../../services/web-socket.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,14 +16,15 @@ import { WebSocketService } from '../../services/web-socket.service';
 export class HomeComponent implements OnInit {
   currentUser?: User;
 
-  constructor(private authService: AuthService, private webSocketService: WebSocketService) { }
+  constructor(private authService: AuthService, private webSocketService: WebSocketService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.currentUser = user;
+        this.webSocketService.connect();
       }
     });
-    this.webSocketService.connect();
   }
+
 }

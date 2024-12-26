@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../../interfaces/user';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class SidebarComponent {
   user = input<User>();
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
   
   logout() {
     this.authService.logout();

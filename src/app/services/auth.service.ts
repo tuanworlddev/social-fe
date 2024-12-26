@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Response } from '../interfaces/response';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { User } from '../interfaces/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private apiUrl = environment.apiUrl;
   private currentUser?: User;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(email: string, password: string): Observable<Response> {
     return this.httpClient.post<Response>(`${this.apiUrl}/api/auth/login`, { email, password });
@@ -33,13 +34,24 @@ export class AuthService {
         return this.currentUser;
       }),
       catchError((error) => {
-        console.error('Error fetching current user:', error);
+        if (error.status === 401) {
+          this.handleUnauthorized();
+        }
         return throwError(() => error);
       })
     );
   }
   
-  
+  private handleUnauthorized(): void {
+    this.clearSession();
+    this.router.navigate(['/login']);
+  }
+
+  private clearSession(): void {
+    this.currentUser = undefined;
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh-token');
+  }
 
   logout() {
     const token = this.getToken();

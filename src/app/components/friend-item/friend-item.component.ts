@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { friend } from '../../interfaces/friend';
 import { FriendService } from '../../services/friend.service';
+import { FriendResponse } from '../../interfaces/friend-response';
 
 @Component({
   selector: 'app-friend-item',
@@ -11,13 +12,16 @@ import { FriendService } from '../../services/friend.service';
   styleUrl: './friend-item.component.css'
 })
 export class FriendItemComponent {
-  friend = input.required<friend>();
+  friend = input.required<FriendResponse>();
 
   constructor(private friendService: FriendService) { }
 
-  confrimFriend(friendId: number) {
-    this.friendService.confirmFriend(friendId).subscribe((response) => {
-      console.log(response);
+  respondToRequest(requestId: number, response: string): void {
+    this.friendService.respondToRequest(requestId, response).subscribe(() => {
     });
+  }
+
+  deleteFriend() {
+    
   }
 }

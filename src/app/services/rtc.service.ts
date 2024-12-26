@@ -6,7 +6,11 @@ import { Subject } from 'rxjs';
 })
 export class RtcService {
   private peerConnection?: RTCPeerConnection;
-  private remoteStream: Subject<MediaStream> = new Subject<MediaStream>();
+  candidateSubject: Subject<any> = new Subject<any>();
+  remoteStreamSubject: Subject<MediaStream> = new Subject<MediaStream>();
+  connectedSubject: Subject<boolean> = new Subject<boolean>();
+  messageSubject: Subject<any> = new Subject<any>();
+  private dataChannel: RTCDataChannel | null = null;
 
   private rtcConfiguration = {
     iceServers: [
@@ -22,10 +26,31 @@ export class RtcService {
 
   createPeerConnection(localStream: MediaStream) {
     this.peerConnection = new RTCPeerConnection(this.rtcConfiguration);
+    this.dataChannel = this.peerConnection.createDataChannel('myDataChannel');
     localStream.getTracks().forEach(track => this.peerConnection?.addTrack(track, localStream));
-    this.peerConnection.ontrack = (event) => {
-      this.remoteStream.next(event.streams[0]);
+    this.peerConnection.onicecandidate = ({ candidate }) => {
+      if (candidate) {
+        this.candidateSubject.next(candidate);
+      }
     };
+    this.peerConnection.ontrack = (event) => {
+      this.remoteStreamSubject.next(event.streams[0]);
+    };
+    this.peerConnection.onconnectionstatechange = () => {
+      const state = this.peerConnection?.connectionState;
+      console.log(`Connection state changed: ${state}`);
+      if (state === 'connected') {
+        this.connectedSubject.next(true);
+      } else if (state === 'disconnected' || state === 'failed' || state === 'closed') {
+        this.connectedSubject.next(false);
+      }
+    };
+    this.peerConnection.ondatachannel = (event) => {
+      const receiveChannel = event.channel;
+      receiveChannel.onmessage = (event) => {
+        this.messageSubject.next(event.data);
+      }
+    }
   }
 
   async createOffer() {
@@ -48,6 +73,12 @@ export class RtcService {
 
   async setIceCandidate(candidate: any) {
     await this.peerConnection?.addIceCandidate(new RTCIceCandidate(candidate));
+  }
+
+  sendMessage(message: any) {
+    if (this.peerConnection && this.dataChannel && this.dataChannel.readyState === 'open') {
+      this.dataChannel.send(message);
+    }
   }
 
   closePeerConnection() {

@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { User } from '../../interfaces/user';
 import { FriendService } from '../../services/friend.service';
+import { UserResponse } from '../../interfaces/user-response';
 
 @Component({
   selector: 'app-user-card',
@@ -10,13 +10,13 @@ import { FriendService } from '../../services/friend.service';
   styleUrl: './user-card.component.css'
 })
 export class UserCardComponent {
-  user = input.required<User>();
+  user = input.required<UserResponse>();
 
   constructor(private friendService: FriendService) { }
 
-  addFriend(friendId: number) {
-    this.friendService.addFriend(friendId).subscribe((response) => {
-      console.log(response);
+  sendFriendRequest(friendId: number): void {
+    this.friendService.sendFriendRequest(friendId).subscribe(() => {
+      alert('Friend request sent!');
     });
   }
 

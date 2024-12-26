@@ -8,12 +8,17 @@ import { Response } from '../interfaces/response';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/api/users`;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAllUser(): Observable<Response> {
-    return this.httpClient.get<Response>(`${this.apiUrl}/api/users`);
+    return this.http.get<Response>(`${this.apiUrl}`);
+  }
+
+  updateStatus(userId: number, status: 'online' | 'offline'): Observable<string> {
+    const url = `${this.apiUrl}/${userId}/status?status=${status}`;
+    return this.http.put<string>(url, {});
   }
 
 }

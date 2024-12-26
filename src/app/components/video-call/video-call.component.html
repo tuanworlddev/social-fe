@@ -1,17 +1,58 @@
 <div class="w-full min-h-screen" style="background-color: #EFF6FC;">
     <div class="w-full flex flex-col md:flex-row items-center justify-start mb-1">
-        <div class="w-full aspect-4/3 bg-zinc-800 relative">
+        <div class="w-full aspect-4/3 flex items-center justify-center bg-zinc-800 relative">
             <video #remoteVideo class="w-full aspect-4/3 -scale-x-100" autoplay playsInline></video>
             @if (!isStarted) {
-                <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-2">
-                    <div>
-                        <svg fill="#FF7F3E" height="300px" width="300px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 455 455" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M382.5,160c-17.921,0-32.5,14.58-32.5,32.5s14.579,32.5,32.5,32.5s32.5-14.58,32.5-32.5S400.421,160,382.5,160z M382.5,210 c-9.649,0-17.5-7.851-17.5-17.5s7.851-17.5,17.5-17.5s17.5,7.851,17.5,17.5S392.149,210,382.5,210z"></path> <path d="M382.5,240c-17.921,0-32.5,14.58-32.5,32.5s14.579,32.5,32.5,32.5s32.5-14.58,32.5-32.5S400.421,240,382.5,240z M382.5,290 c-9.649,0-17.5-7.851-17.5-17.5s7.851-17.5,17.5-17.5s17.5,7.851,17.5,17.5S392.149,290,382.5,290z"></path> <path d="M407.5,400h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,400,407.5,400z"></path> <path d="M407.5,370h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,370,407.5,370z"></path> <path d="M407.5,340h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,340,407.5,340z"></path> <path d="M427.5,120H209.159l51.71-95.148c6.029-0.887,10.676-6.08,10.676-12.352c0-6.893-5.607-12.5-12.5-12.5 s-12.5,5.607-12.5,12.5c0,1.853,0.416,3.607,1.143,5.19L192.086,120h-31.079L105.402,17.69c0.727-1.583,1.143-3.337,1.143-5.19 c0-6.893-5.607-12.5-12.5-12.5s-12.5,5.607-12.5,12.5c0,6.272,4.648,11.464,10.677,12.352L143.934,120H27.5 C12.336,120,0,132.336,0,147.5v280C0,442.664,12.336,455,27.5,455h400c15.163,0,27.5-12.336,27.5-27.5v-280 C455,132.336,442.663,120,427.5,120z M440,427.5c0,6.893-5.607,12.5-12.5,12.5h-400c-6.893,0-12.5-5.607-12.5-12.5v-280 c0-6.893,5.607-12.5,12.5-12.5h129.031c0.007,0,0.015,0.001,0.022,0.001c0.008,0,0.016-0.001,0.024-0.001h39.938 c0.008,0,0.016,0.001,0.024,0.001c0.007,0,0.015-0.001,0.022-0.001H427.5c6.893,0,12.5,5.607,12.5,12.5V427.5z"></path> <path d="M295.288,186.301C273.339,169.832,231.175,160,182.5,160s-90.839,9.832-112.789,26.301 c-16.584,12.442-27.284,42.286-29.358,81.878c-2.17,41.436,5.903,95.697,28.756,116.916C92.856,407.144,143.253,415,182.5,415 s89.644-7.856,113.39-29.905c8.923-8.284,16.072-21.94,21.251-40.588c1.108-3.991-1.229-8.125-5.22-9.233 c-3.997-1.109-8.125,1.229-9.233,5.22c-4.362,15.71-10.242,27.332-17.004,33.609C268.741,389.834,228.239,400,182.5,400 s-86.241-10.166-103.185-25.897c-16.032-14.886-26.342-60.085-23.982-105.139c1.813-34.624,10.554-61.041,23.38-70.665 C97.868,183.928,137.637,175,182.5,175s84.632,8.928,103.786,23.299c18.288,13.721,27.929,63.492,21.949,113.307 c-0.494,4.113,2.439,7.847,6.553,8.341c4.104,0.486,7.846-2.44,8.34-6.553C328.762,266.469,322.452,206.681,295.288,186.301z"></path> </g> </g></svg>
-                    </div>
-                    <div class=" text-xl text-white flex items-center justify-center gap-2">
-                        <svg fill="#00d103" height="32px" width="32px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" stroke="#00d103"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z"></path></g></svg>
-                        <span>230 User onlines</span>
-                    </div>
+            <div class="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center gap-2">
+                <div>
+                    <svg fill="#FF7F3E" height="300px" width="300px" version="1.1" id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 455 455" xml:space="preserve">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path
+                                    d="M382.5,160c-17.921,0-32.5,14.58-32.5,32.5s14.579,32.5,32.5,32.5s32.5-14.58,32.5-32.5S400.421,160,382.5,160z M382.5,210 c-9.649,0-17.5-7.851-17.5-17.5s7.851-17.5,17.5-17.5s17.5,7.851,17.5,17.5S392.149,210,382.5,210z">
+                                </path>
+                                <path
+                                    d="M382.5,240c-17.921,0-32.5,14.58-32.5,32.5s14.579,32.5,32.5,32.5s32.5-14.58,32.5-32.5S400.421,240,382.5,240z M382.5,290 c-9.649,0-17.5-7.851-17.5-17.5s7.851-17.5,17.5-17.5s17.5,7.851,17.5,17.5S392.149,290,382.5,290z">
+                                </path>
+                                <path
+                                    d="M407.5,400h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,400,407.5,400z">
+                                </path>
+                                <path
+                                    d="M407.5,370h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,370,407.5,370z">
+                                </path>
+                                <path
+                                    d="M407.5,340h-50c-4.143,0-7.5,3.358-7.5,7.5s3.357,7.5,7.5,7.5h50c4.143,0,7.5-3.358,7.5-7.5S411.643,340,407.5,340z">
+                                </path>
+                                <path
+                                    d="M427.5,120H209.159l51.71-95.148c6.029-0.887,10.676-6.08,10.676-12.352c0-6.893-5.607-12.5-12.5-12.5 s-12.5,5.607-12.5,12.5c0,1.853,0.416,3.607,1.143,5.19L192.086,120h-31.079L105.402,17.69c0.727-1.583,1.143-3.337,1.143-5.19 c0-6.893-5.607-12.5-12.5-12.5s-12.5,5.607-12.5,12.5c0,6.272,4.648,11.464,10.677,12.352L143.934,120H27.5 C12.336,120,0,132.336,0,147.5v280C0,442.664,12.336,455,27.5,455h400c15.163,0,27.5-12.336,27.5-27.5v-280 C455,132.336,442.663,120,427.5,120z M440,427.5c0,6.893-5.607,12.5-12.5,12.5h-400c-6.893,0-12.5-5.607-12.5-12.5v-280 c0-6.893,5.607-12.5,12.5-12.5h129.031c0.007,0,0.015,0.001,0.022,0.001c0.008,0,0.016-0.001,0.024-0.001h39.938 c0.008,0,0.016,0.001,0.024,0.001c0.007,0,0.015-0.001,0.022-0.001H427.5c6.893,0,12.5,5.607,12.5,12.5V427.5z">
+                                </path>
+                                <path
+                                    d="M295.288,186.301C273.339,169.832,231.175,160,182.5,160s-90.839,9.832-112.789,26.301 c-16.584,12.442-27.284,42.286-29.358,81.878c-2.17,41.436,5.903,95.697,28.756,116.916C92.856,407.144,143.253,415,182.5,415 s89.644-7.856,113.39-29.905c8.923-8.284,16.072-21.94,21.251-40.588c1.108-3.991-1.229-8.125-5.22-9.233 c-3.997-1.109-8.125,1.229-9.233,5.22c-4.362,15.71-10.242,27.332-17.004,33.609C268.741,389.834,228.239,400,182.5,400 s-86.241-10.166-103.185-25.897c-16.032-14.886-26.342-60.085-23.982-105.139c1.813-34.624,10.554-61.041,23.38-70.665 C97.868,183.928,137.637,175,182.5,175s84.632,8.928,103.786,23.299c18.288,13.721,27.929,63.492,21.949,113.307 c-0.494,4.113,2.439,7.847,6.553,8.341c4.104,0.486,7.846-2.44,8.34-6.553C328.762,266.469,322.452,206.681,295.288,186.301z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
                 </div>
+                <div class=" text-xl text-white flex items-center justify-center gap-2">
+                    <svg fill="#00d103" height="32px" width="32px" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#00d103">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M7.8 10a2.2 2.2 0 0 0 4.4 0 2.2 2.2 0 0 0-4.4 0z"></path>
+                        </g>
+                    </svg>
+                    <span>{{ countUsersOnline }} User onlines</span>
+                </div>
+            </div>
+            } @else {
+            @if (isSearching) {
+            <img src="spinner.svg" alt="loading" class="absolute" width="128px" height="128px">
+            }
             }
         </div>
         <div class="w-full aspect-4/3 bg-black">
@@ -21,21 +62,60 @@
     <div class="w-full flex flex-col md:flex-row items-center justify-start p-1">
         <div class="w-full flex items-center justify-start gap-3">
             @if (isStarted) {
-                <button class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Next</button>
+            <button (click)="onNext()"
+                class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors"
+                [disabled]="isSearching">Next</button>
             } @else {
-                <button (click)="onChangeStatus()" class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Start</button>
+            <button (click)="onStart()"
+                class="w-full py-16 bg-green-500 text-white text-2xl rounded shadow-md shadow-green-700 hover:bg-green-600 active:bg-green-700 disabled:shadow-none disabled:bg-green-300 transition-colors">Start</button>
             }
-            <button (click)="onChangeStatus()" class="w-full py-16 bg-red-500 text-white text-2xl rounded shadow-md shadow-red-700 hover:bg-red-600 active:bg-red-700 disabled:shadow-none disabled:bg-red-300 transition-colors" [disabled]="!isStarted">Stop</button>
-            <div class="w-full"></div>
+            <button (click)="onStop()"
+                class="w-full py-16 bg-red-500 text-white text-2xl rounded shadow-md shadow-red-700 hover:bg-red-600 active:bg-red-700 disabled:shadow-none disabled:bg-red-300 transition-colors"
+                [disabled]="!isStarted">Stop</button>
+            @if (isStarted) {
+            <button (click)="sendFriendRequest()"
+                class="w-full py-16 bg-blue-500 text-white text-2xl rounded shadow-md shadow-blue-700 hover:bg-blue-600 active:bg-blue-700 disabled:shadow-none disabled:bg-blue-300 transition-colors"
+                [disabled]="isSearching || checkFriend()">
+                @if (!checkFriend()) {
+                    <span>+ Add friend</span>
+                } @else {
+                    <span>Friend</span>
+                }
+            </button>
+            }
             <div class="w-full"></div>
         </div>
         <div class="w-full border bg-white rounded">
             <h3 class="text-xl px-2 py-1 border-b">Messages</h3>
-            <div class="w-full h-36 px-2 py-1 border-b overflow-y-auto"></div>
-            <form class="w-full flex items-center px-2">
-                <input type="text" name="message" id="message" class="w-full py-1 outline-none" placeholder="Enter a message..." required>
+            <div #messageContainer
+                class="w-full flex flex-col scrollbar-hidden h-36 px-2 py-1 border-b overflow-y-auto">
+                @for (message of messages; track $index) {
+                <span class="inline mb-0.5 px-3 py-1 rounded-full max-w-[80%] break-words" [ngClass]="{
+            'bg-gray-200 text-black text-right ml-auto': message.sender === 'me',
+            'bg-blue-500 text-white text-left mr-auto': message.sender !== 'me'
+          }">{{ message.message }}</span>
+                }
+            </div>
+            <form [formGroup]="formSendMessage" (submit)="sendMessage()" class="w-full flex items-center px-2">
+                <input type="text" name="message" id="message" class="w-full py-1 outline-none"
+                    formControlName="content" placeholder="Enter a message..." required>
                 <button type="submit" class="p-1">
-                    <svg fill="#000000" height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 495.003 495.003" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="XMLID_51_"> <path id="XMLID_53_" d="M164.711,456.687c0,2.966,1.647,5.686,4.266,7.072c2.617,1.385,5.799,1.207,8.245-0.468l55.09-37.616 l-67.6-32.22V456.687z"></path> <path id="XMLID_52_" d="M492.431,32.443c-1.513-1.395-3.466-2.125-5.44-2.125c-1.19,0-2.377,0.264-3.5,0.816L7.905,264.422 c-4.861,2.389-7.937,7.353-7.904,12.783c0.033,5.423,3.161,10.353,8.057,12.689l125.342,59.724l250.62-205.99L164.455,364.414 l156.145,74.4c1.918,0.919,4.012,1.376,6.084,1.376c1.768,0,3.519-0.322,5.186-0.977c3.637-1.438,6.527-4.318,7.97-7.956 L494.436,41.257C495.66,38.188,494.862,34.679,492.431,32.443z"></path> </g> </g></svg>
+                    <svg fill="#000000" height="24px" width="24px" version="1.1" id="Capa_1"
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 495.003 495.003" xml:space="preserve">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g id="XMLID_51_">
+                                <path id="XMLID_53_"
+                                    d="M164.711,456.687c0,2.966,1.647,5.686,4.266,7.072c2.617,1.385,5.799,1.207,8.245-0.468l55.09-37.616 l-67.6-32.22V456.687z">
+                                </path>
+                                <path id="XMLID_52_"
+                                    d="M492.431,32.443c-1.513-1.395-3.466-2.125-5.44-2.125c-1.19,0-2.377,0.264-3.5,0.816L7.905,264.422 c-4.861,2.389-7.937,7.353-7.904,12.783c0.033,5.423,3.161,10.353,8.057,12.689l125.342,59.724l250.62-205.99L164.455,364.414 l156.145,74.4c1.918,0.919,4.012,1.376,6.084,1.376c1.768,0,3.519-0.322,5.186-0.977c3.637-1.438,6.527-4.318,7.97-7.956 L494.436,41.257C495.66,38.188,494.862,34.679,492.431,32.443z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
                 </button>
             </form>
         </div>
